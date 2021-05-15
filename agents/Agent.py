@@ -9,8 +9,8 @@ PROVIDER_URL = 'http://127.0.0.1:8545'
 class Agent(ABC):
     def __init__(self, account):
         self.w3 = Web3(Web3.HTTPProvider(PROVIDER_URL))
-        self.account = account
         self.dao = get_dao()
+        self.account = account
 
     @staticmethod
     def get_status(status_code):
