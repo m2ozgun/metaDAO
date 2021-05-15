@@ -35,7 +35,7 @@ contract Dao is DaoInterface {
     IERC20 public token;
     uint256 public totalShares;
     uint256 constant quorumPeriod = 1 weeks;
-    uint256 constant quorumPercentage = 60;
+    uint256 constant quorumPercentage = 50;
 
     mapping(bytes32 => Proposal) public proposals;
     bytes32[] proposalHashes;
