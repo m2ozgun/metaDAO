@@ -1,7 +1,9 @@
 from abc import ABC
 from web3 import Web3
-from utils import get_dao
+from utils import get_dao, bytes32_to_ipfs
 import time
+import shortuuid
+import ipfshttpclient
 
 PROVIDER_URL = 'http://127.0.0.1:8545'
 
@@ -11,6 +13,8 @@ class Agent(ABC):
         self.w3 = Web3(Web3.HTTPProvider(PROVIDER_URL))
         self.dao = get_dao()
         self.account = account
+        self.uuid = shortuuid.uuid()
+        self.ipfs_client = ipfshttpclient.connect()
 
     @staticmethod
     def get_status(status_code):
@@ -40,5 +44,8 @@ class Agent(ABC):
             fromBlock='latest')
         while True:
             for event in event_filter.get_new_entries():
-                print(event)
+                print(f'Agent: {self.uuid} Event: {event["args"]["_proposalHash"]}')
+                proposal_hash = bytes32_to_ipfs(event["args"]["_proposalHash"])
+                file_content = self.ipfs_client.cat(proposal_hash)
+                print(f' * -- Agent: {self.uuid} IPFS File: {file_content}')
             time.sleep(poll_interval)
