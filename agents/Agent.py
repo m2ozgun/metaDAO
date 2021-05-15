@@ -4,7 +4,7 @@ from utils import get_dao, bytes32_to_ipfs
 import time
 import shortuuid
 import ipfshttpclient
-
+import json
 PROVIDER_URL = 'http://127.0.0.1:8545'
 
 
@@ -47,5 +47,5 @@ class Agent(ABC):
                 print(f'Agent: {self.uuid} Event: {event["args"]["_proposalHash"]}')
                 proposal_hash = bytes32_to_ipfs(event["args"]["_proposalHash"])
                 file_content = self.ipfs_client.cat(proposal_hash)
-                print(f' * -- Agent: {self.uuid} IPFS File: {file_content}')
+                print(f' * -- Agent: {self.uuid} IPFS File: {json.loads(file_content)}')
             time.sleep(poll_interval)

@@ -23,7 +23,7 @@ def ipfs_to_bytes32(ipfs_hash: str) -> str:
 
 
 EXAMPLE_HASH = ipfs_to_bytes32(
-    'QmZuqK2hEpzZmXE4dsg65QsLWB3k18sQjFGZnShtux8mjG')
+    'QmUEQFgFBpnwmPNY8GBNmCHWBvqak3DaGEvRWDqstZ93kK')
 print(EXAMPLE_HASH)
 
 token_address = '0x21E73cfbe1F4196a8D9f80384c29eD39624343ca'
